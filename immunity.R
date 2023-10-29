@@ -6,9 +6,6 @@ library(data.table)
 library(rtracklayer)
 rm(list=ls())
 if(F){
-### ssGSEA ######
-## table S1 - https://doi.org/10.1016/j.immuni.2013.10.003 
-## pdf -> table -> read
 immunity <- read.csv("immune_mhh/immunity-cell-gene.csv", header = T)
 colnames(immunity)
 immunity=immunity[,c(1,5,9,13,20)]
@@ -76,17 +73,6 @@ data <- log2(data + 1)
 
 immu_cell <-  as.data.frame(gsva(as.matrix(data), immunity, method = "ssgsea"))
 
-
-### group plot 
-# data <- read.table("~/file.txt", header = T)
-#        group       aDC
-# 1 1.13092315 0.4709550
-# 3 0.55644003 0.1800251
-# 4 0.44696904 0.3350859
-# 5 0.05474605 0.1191767
-# 7 0.61364297 0.1563856
-# 8 0.41079217 0.4588979
-# colnames(data) <- c("x", "y")
 data <- as.data.frame(exp["PIR",])
 colnames(data)="PIR"
 data$group <- ifelse(data$PIR >= mean(data$PIR), "High", "Low")
